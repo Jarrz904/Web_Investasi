@@ -3,20 +3,24 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InvestasiController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\DashboardController; // Pastikan controller admin diimport
 
 /*
 |--------------------------------------------------------------------------
 | Portal Investasi Kabupaten Tegal - Web Routes
 |--------------------------------------------------------------------------
-*/Route::middleware('guest')->group(function () {
+*/
+
+// --- AUTHENTICATION ---
+Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 });
 
-// Logout route
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// 1. BERANDA
+
+// --- PUBLIC AREA ---
 Route::get('/', [InvestasiController::class, 'index'])->name('beranda');
 
 // 2. POTENSI (Dropdown Menu)
@@ -37,7 +41,6 @@ Route::get('/peta-investasi', [InvestasiController::class, 'peta'])->name('peta.
 
 // 5. PERUSAHAAN
 Route::get('/perusahaan', [InvestasiController::class, 'perusahaan'])->name('perusahaan.index');
-// Tambahan rute show untuk menangani detail perusahaan (Memperbaiki error RouteNotFoundException)
 Route::get('/perusahaan/{id}', [InvestasiController::class, 'detailPerusahaan'])->name('perusahaan.show');
 
 // 6. GALERI
@@ -45,3 +48,16 @@ Route::get('/galeri', [InvestasiController::class, 'galeri'])->name('galeri.inde
 
 // 7. KONTAK
 Route::get('/kontak', [InvestasiController::class, 'kontak'])->name('kontak.index');
+
+
+// --- ADMIN AREA (TAMBAHAN BARU) ---
+// Semua rute di dalam group ini membutuhkan login (middleware auth)
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    
+    // Dashboard Utama
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Contoh Rute Manajemen Proyek (CRUD nantinya)
+    // Route::resource('proyek', ProyekController::class);
+    
+});

@@ -74,7 +74,7 @@
                          x-transition:enter-end="opacity-100 transform scale-100 translate-y-0"
                          class="absolute bottom-full z-50 w-full mb-2 bg-white border border-gray-100 rounded-xl shadow-2xl overflow-hidden">
                         <div class="max-h-60 overflow-y-auto custom-scrollbar">
-                            <template x-for="sektor in ['Manufaktur', 'Pertanian', 'Pariwisata', 'Perdagangan', 'Jasa', 'Infrastruktur']">
+                            <template x-for="sektor in ['Perkebunan dan Pertanian', 'Industri Pengolahaan', 'Usaha Jasa', 'Air, Limbah & Sampah', 'Konstruksi', 'Perdagangan Besar & Eceran', 'Perdagangan & Pengangkutan', 'Akomondasi dan Makan', 'Informasi dan Telekomunikasi', 'Keuangan dan Asuransi', 'Jasa Properti', 'Pendidikan', 'Kesehatan Sosial', 'Pariwisata', 'Lainnya']">
                                 <div @click="selected = sektor; label = sektor; open = false" 
                                      class="px-4 py-3 text-sm text-gray-700 hover:bg-[#8D734B] hover:text-white cursor-pointer transition-colors"
                                      x-text="sektor">
